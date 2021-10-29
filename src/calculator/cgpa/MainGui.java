@@ -38,6 +38,7 @@ public class MainGui extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple CGPA Calculator");
+        setResizable(false);
 
         taConsole.setColumns(20);
         taConsole.setRows(5);
