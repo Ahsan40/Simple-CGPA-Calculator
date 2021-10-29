@@ -3,84 +3,78 @@ package calculator.cgpa;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class MainGui extends javax.swing.JFrame {
+public class MainGui extends JFrame {
+
+    // Variables declaration
+    //<editor-fold defaultstate="collapsed" desc=" Variable Declarations ">
+    private JButton btnAdd;
+    private JButton btnCalculate;
+    private JButton btnClear;
+    private JButton btnLoadFromFile;
+    private JButton btnRemove;
+    private JScrollPane jspConsole;
+    private JRadioButton rdoCGPA;
+    private JRadioButton rdoGPA;
+    private JTextArea taConsole;
+    private JTextField tfCredit;
+    private JTextField tfName;
+    private JTextField tfResult;
+    // End of variables declaration
+    //</editor-fold>
 
     public MainGui() {
+
         // initializing components
         initComponents();
+
+        // window settings
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Simple CGPA Calculator");
+        setResizable(false);
 
         // change default theme to "Nimbus"
         theme();
 
         // set app window to center of screen
         this.setLocationRelativeTo(null);
+
+        // action events method reference
+        btnAdd.addActionListener(this::btnAddActionPerformed);
+        btnRemove.addActionListener(this::btnRemoveActionPerformed);
+        btnClear.addActionListener(this::btnClearActionPerformed);
+        btnCalculate.addActionListener(this::btnCalculateActionPerformed);
+        btnLoadFromFile.addActionListener(this::btnLoadFromFileActionPerformed);
+        rdoGPA.addActionListener(this::rdoGPAActionPerformed);
+        rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
     }
 
     private void initComponents() {
+        rdoGPA = new JRadioButton("GPA");
+        rdoCGPA = new JRadioButton("CGPA");
+        tfName = new JTextField();
+        tfResult = new JTextField();
+        tfCredit = new JTextField();
 
-        // Variables declaration
-        JDialog dlgResult = new JDialog();
-        JScrollPane jScrollPane1 = new JScrollPane();
-        JTextArea taConsole = new JTextArea();
-        JButton btnAdd = new JButton();
-        JButton btnRemove = new JButton();
-        JButton btnClear = new JButton();
-        JButton btnCalculate = new JButton();
-        JButton btnLoadFromFile = new JButton();
-        JRadioButton rdoGPA = new JRadioButton();
-        JRadioButton rdoCGPA = new JRadioButton();
-        JTextField tfName = new JTextField();
-        JTextField tfResult = new JTextField();
-        JTextField tfCredit = new JTextField();
+        tfName.setToolTipText("Name (Optional)");
+        tfResult.setToolTipText("Result (eg. 3.75)");
+        tfCredit.setToolTipText("Credit (eg. 1.5)");
 
-        GroupLayout dlgResultLayout = new GroupLayout(dlgResult.getContentPane());
-        dlgResult.getContentPane().setLayout(dlgResultLayout);
-        dlgResultLayout.setHorizontalGroup(
-            dlgResultLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        dlgResultLayout.setVerticalGroup(
-            dlgResultLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        btnAdd = new JButton("Add");
+        btnRemove = new JButton("Remove");
+        btnClear = new JButton("Clear");
+        btnCalculate = new JButton("Calculate");
+        btnLoadFromFile = new JButton("Load From Txt File");
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Simple CGPA Calculator");
-        setResizable(false);
+        taConsole = new JTextArea();
+        jspConsole = new JScrollPane();
 
         taConsole.setColumns(20);
         taConsole.setRows(5);
         taConsole.setEnabled(false);
-        jScrollPane1.setViewportView(taConsole);
-
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(this::btnAddActionPerformed);
-
-        btnRemove.setText("Remove");
-        btnRemove.addActionListener(this::btnRemoveActionPerformed);
-
-        btnClear.setText("Clear");
-        btnClear.addActionListener(this::btnClearActionPerformed);
-
-        btnCalculate.setText("Calculate");
-        btnCalculate.addActionListener(this::btnCalculateActionPerformed);
-
-        btnLoadFromFile.setText("Load From Txt File");
-        btnLoadFromFile.addActionListener(this::btnLoadFromFileActionPerformed);
-
-        rdoGPA.setText("GPA");
-        rdoGPA.addActionListener(this::rdoGPAActionPerformed);
-
-        rdoCGPA.setText("CGPA");
-        rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
-
-        tfName.setToolTipText("Name (Optional)");
-
-        tfResult.setToolTipText("Result (eg. 3.75)");
-
-        tfCredit.setToolTipText("Credit (eg. 1.5)");
+        jspConsole.setViewportView(taConsole);
 
         // Done with NetBeans
+        //<editor-fold defaultstate="collapsed" desc=" initialization Codes ">
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,7 +82,7 @@ public class MainGui extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1)
+                                        .addComponent(jspConsole)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -137,10 +131,10 @@ public class MainGui extends javax.swing.JFrame {
                                                 .addComponent(btnCalculate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jspConsole, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
-
+    //</editor-fold>
         pack();
     }
 
