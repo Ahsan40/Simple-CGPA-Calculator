@@ -25,18 +25,18 @@ public class MainGui extends javax.swing.JFrame {
         JTextField tfResult = new JTextField();
         JTextField tfCredit = new JTextField();
 
-        javax.swing.GroupLayout dlgResultLayout = new javax.swing.GroupLayout(dlgResult.getContentPane());
+        GroupLayout dlgResultLayout = new GroupLayout(dlgResult.getContentPane());
         dlgResult.getContentPane().setLayout(dlgResultLayout);
         dlgResultLayout.setHorizontalGroup(
-            dlgResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            dlgResultLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
         dlgResultLayout.setVerticalGroup(
-            dlgResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            dlgResultLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple CGPA Calculator");
         setResizable(false);
 
