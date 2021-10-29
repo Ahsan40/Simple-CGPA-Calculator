@@ -45,53 +45,25 @@ public class MainGui extends javax.swing.JFrame {
         jScrollPane1.setViewportView(taConsole);
 
         btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
+        btnAdd.addActionListener(this::btnAddActionPerformed);
 
         btnRemove.setText("Remove");
-        btnRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveActionPerformed(evt);
-            }
-        });
+        btnRemove.addActionListener(this::btnRemoveActionPerformed);
 
         btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
+        btnClear.addActionListener(this::btnClearActionPerformed);
 
-        btnCalvulate.setText("Calculate");
-        btnCalvulate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalvulateActionPerformed(evt);
-            }
-        });
+        btnCalculate.setText("Calculate");
+        btnCalculate.addActionListener(this::btnCalculateActionPerformed);
 
         btnLoadFromFile.setText("Load From Txt File");
-        btnLoadFromFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadFromFileActionPerformed(evt);
-            }
-        });
+        btnLoadFromFile.addActionListener(this::btnLoadFromFileActionPerformed);
 
         rdoGPA.setText("GPA");
-        rdoGPA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoGPAActionPerformed(evt);
-            }
-        });
+        rdoGPA.addActionListener(this::rdoGPAActionPerformed);
 
         rdoCGPA.setText("CGPA");
-        rdoCGPA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoCGPAActionPerformed(evt);
-            }
-        });
+        rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
 
         tfName.setToolTipText("Name (Optional)");
 
