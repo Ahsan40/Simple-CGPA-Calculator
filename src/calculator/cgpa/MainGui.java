@@ -19,6 +19,7 @@ public class MainGui extends JFrame {
     private JTextField tfCredit;
     private JTextField tfName;
     private JTextField tfResult;
+    private int category;
     // End of variables declaration
     //</editor-fold>
 
@@ -48,10 +49,13 @@ public class MainGui extends JFrame {
         rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
     }
 
+
     private void initComponents() {
-        rdoGPA = new JRadioButton("GPA");
-        rdoCGPA = new JRadioButton("CGPA");
-        tfName = new JTextField();
+        rdoGPA = new JRadioButton("GPA", true);
+        rdoCGPA = new JRadioButton("CGPA", false);
+        category = 1;
+
+        tfName = new JTextField("Subject");
         tfResult = new JTextField();
         tfCredit = new JTextField();
 
@@ -138,15 +142,23 @@ public class MainGui extends JFrame {
         pack();
     }
 
-    private void btnClearActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     private void rdoGPAActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        if (rdoCGPA.isSelected()) {
+            rdoCGPA.setSelected(false);
+        }
+        rdoGPA.setSelected(true);
+        category = 1;
     }
 
     private void rdoCGPAActionPerformed(ActionEvent evt) {
+        if (rdoGPA.isSelected()) {
+            rdoGPA.setSelected(false);
+        }
+        rdoCGPA.setSelected(true);
+        category = 2;
+    }
+
+    private void btnClearActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
