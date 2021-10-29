@@ -6,6 +6,7 @@ public class MainGui extends javax.swing.JFrame {
 
     public MainGui() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     private void initComponents() {
