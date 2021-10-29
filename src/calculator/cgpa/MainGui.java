@@ -1,11 +1,18 @@
 package calculator.cgpa;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class MainGui extends javax.swing.JFrame {
 
     public MainGui() {
+        // initializing components
         initComponents();
+
+        // change default theme to "Nimbus"
+        theme();
+
+        // set app window to center of screen
         this.setLocationRelativeTo(null);
     }
 
@@ -135,38 +142,33 @@ public class MainGui extends javax.swing.JFrame {
         );
 
         pack();
-
-        // method to change default theme of swing
-        theme();
     }
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnClearActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void rdoGPAActionPerformed(java.awt.event.ActionEvent evt) {
+    private void rdoGPAActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void rdoCGPAActionPerformed(java.awt.event.ActionEvent evt) {
+    private void rdoCGPAActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-//        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        new Result("Tgg");
-    }
-
-    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnAddActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnRemoveActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnLoadFromFileActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnCalculateActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void btnLoadFromFileActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
