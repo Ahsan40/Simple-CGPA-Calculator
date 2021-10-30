@@ -25,3 +25,5 @@ hs_err_pid*
 # Custom
 out/
 /.idea/uiDesigner.xml
+/calculatedResult.txt
+/resultData.txt
