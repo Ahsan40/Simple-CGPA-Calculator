@@ -63,6 +63,7 @@ public class MainGui extends JFrame {
         btnClear.addActionListener(this::btnClearActionPerformed);
         btnCalculate.addActionListener(this::btnCalculateActionPerformed);
         btnLoadFromFile.addActionListener(this::btnLoadFromFileActionPerformed);
+        btnSaveToFile.addActionListener(this::btnSaveToFileActionPerformed);
         rdoGPA.addActionListener(this::rdoGPAActionPerformed);
         rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
         // tfResult validation
@@ -336,6 +337,22 @@ public class MainGui extends JFrame {
                          " Thus, calculation will not performed automatically." +
                          " Please add more data and click 'Calculate' button.";
             new DialogGui(2, "Warning!", tmp);
+        }
+    }
+
+    private void btnSaveToFileActionPerformed(ActionEvent evt) {
+        String fileName = "calculatedResult.txt";
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+            for (GPA a: info) {
+                bw.write(a.toString() + "\n");
+            }
+            bw.write((category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
+            bw.close();
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
+            new DialogGui(3, "Error!", "Could not create the " + fileName + " file");
         }
     }
 
