@@ -2,6 +2,8 @@ package calculator.cgpa;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainGui extends JFrame {
 
@@ -51,8 +53,25 @@ public class MainGui extends JFrame {
         btnLoadFromFile.addActionListener(this::btnLoadFromFileActionPerformed);
         rdoGPA.addActionListener(this::rdoGPAActionPerformed);
         rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
+        // tfResult validation
+        tfResult.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') || c == '.' || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    e.consume();
+                }
+            }
+        });
+        // tfCredit validation
+        tfCredit.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') || c == '.' || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    e.consume();
+                }
+            }
+        });
     }
-
 
     private void initComponents() {
         rdoGPA = new JRadioButton("GPA", true);
@@ -72,8 +91,8 @@ public class MainGui extends JFrame {
         tfCredit.setToolTipText("Credit (eg. 1.5)");
 
         btnAdd = new JButton("Add");
-        btnRemove = new JButton("Remove");
-        btnClear = new JButton("Clear");
+        btnRemove = new JButton("Remove Last");
+        btnClear = new JButton("Clear All");
         btnCalculate = new JButton("Calculate");
         btnLoadFromFile = new JButton("Load From Txt File");
         btnSaveToFile = new JButton("Save To Txt File");
