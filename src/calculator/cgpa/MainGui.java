@@ -200,8 +200,7 @@ public class MainGui extends JFrame {
     private void btnLoadFromFileActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
-
-
+    
     private void theme() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -215,10 +214,5 @@ public class MainGui extends JFrame {
             java.util.logging.Logger.getLogger(MainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-    }
-
-    public static void main(String[] args) {
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainGui().setVisible(true));
     }
 }
