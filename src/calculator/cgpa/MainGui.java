@@ -98,7 +98,7 @@ public class MainGui extends JFrame {
         lblResult = new JLabel("Result");
         lblCredit = new JLabel("Credit");
 
-        tfName = new JTextField("Subject");
+        tfName = new JTextField("Subject 1");
         tfResult = new JTextField();
         tfCredit = new JTextField();
 
@@ -233,6 +233,7 @@ public class MainGui extends JFrame {
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
         entryCount = 0;
+        tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
     }
 
     private void btnAddActionPerformed(ActionEvent evt) {
@@ -274,6 +275,7 @@ public class MainGui extends JFrame {
                 entryCount++;
             }
             br.close();
+            tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
             if (info.size() == 0)
                 throw new InvalidParameterException();
             else if (info.size() < 2)
