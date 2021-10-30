@@ -277,6 +277,7 @@ public class MainGui extends JFrame {
             entryCount--;
             info.remove(entryCount);
             model.removeRow(entryCount);
+            tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
         }
         catch (IndexOutOfBoundsException ioobe) {
             ioobe.printStackTrace();
