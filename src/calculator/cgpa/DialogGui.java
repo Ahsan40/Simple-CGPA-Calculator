@@ -1,53 +1,83 @@
 package calculator.cgpa;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
-public class DialogGui extends JDialog {
-    public DialogGui(String txt) {
-        initComponents();
-        JDialog dialog = new JDialog(new javax.swing.JFrame(), txt);
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                dialog.dispose();
-            }
-        });
-        dialog.setVisible(true);
+public class DialogGui extends JDialog implements Runnable {
+    private String msg;
+    int lineBreak;
+
+    public DialogGui(int lineBreak, String title, String msg) {
+        this.msg = msg;
+        this.lineBreak = lineBreak;
+
+        // window settings
+        setTitle(title);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+
+        // start in new thread
+        Thread t = new Thread(this);
+        t.start();
     }
 
     private void initComponents() {
+        JTextPane msgPane = new JTextPane();
+        while (lineBreak > 0) {
+            msg = "\n" + msg;
+            lineBreak--;
+        }
+        msgPane.setText(msg);
 
-        lblText = new javax.swing.JLabel();
+        // TextPane Settings
+        msgPane.setEditable(false);
+        msgPane.setBorder(null);
+        msgPane.setFont(new java.awt.Font("sanserif", 0, 18));
+        msgPane.setForeground(new java.awt.Color(223, 30, 73));
+        msgPane.setOpaque(false);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Result");
-        setAlwaysOnTop(true);
+        // TextPane Align to Center
+        StyledDocument doc = msgPane.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-        lblText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblText.setText("Test");
-        lblText.setToolTipText("");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        // Layout Setting (NetBeans)
+        //<editor-fold defaultstate="collapsed" desc=" initialization Codes ">
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 26, Short.MAX_VALUE)
+                                .addComponent(msgPane, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 26, Short.MAX_VALUE)
+                                .addComponent(msgPane, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 27, Short.MAX_VALUE))
         );
 
         pack();
+        // </editor-fold>
     }
 
-    // Variables declaration
-    private javax.swing.JLabel lblText;
-    // End of variables declaration
+    @Override
+    public void run() {
+        initComponents();
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DialogGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        setVisible(true);
+//        System.out.println(Thread.currentThread().getId()); // debug
+    }
 }
