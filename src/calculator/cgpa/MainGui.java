@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
+import java.security.InvalidKeyException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -237,7 +238,37 @@ public class MainGui extends JFrame {
     }
 
     private void btnAddActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        try {
+            // getting data
+            String name = tfName.getText();
+            double result = Double.parseDouble(tfResult.getText());
+            double credit = Double.parseDouble(tfCredit.getText());
+
+            // checking data
+            if (credit < 1)
+                throw new InvalidParameterException();
+            if (result < 0)
+                throw new InvalidKeyException();
+
+            // adding data
+            GPA tmp = new GPA(name, result, credit);
+            info.add(tmp);
+            model.addRow(tmp.toArray());
+
+            // changing other ui states
+            if (name.equals("Subject " + (entryCount + 1)) || name.equals("Semester " + (entryCount + 1))) {
+                entryCount++;
+                tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
+            }
+        }
+        catch (InvalidParameterException ipe) {
+            ipe.printStackTrace();
+            new DialogGui(3, "Warning!", "Credit can not be less than 1!");
+        }
+        catch (InvalidKeyException ike) {
+            ike.printStackTrace();
+            new DialogGui(3, "Warning!", "Result can not be negative!");
+        }
     }
 
     private void btnRemoveActionPerformed(ActionEvent evt) {
