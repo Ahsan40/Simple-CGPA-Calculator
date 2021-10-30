@@ -35,6 +35,7 @@ public class MainGui extends JFrame {
     private JTextField tfName;
     private JTextField tfResult;
     private int category;
+    private int entryCount;
     // End of variables declaration
     //</editor-fold>
 
@@ -42,6 +43,7 @@ public class MainGui extends JFrame {
 
         // initializing components
         initComponents();
+        entryCount = 0;
 
         // window settings
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -230,6 +232,7 @@ public class MainGui extends JFrame {
         info.clear();
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
+        entryCount = 0;
     }
 
     private void btnAddActionPerformed(ActionEvent evt) {
@@ -237,7 +240,16 @@ public class MainGui extends JFrame {
     }
 
     private void btnRemoveActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        try {
+            if (entryCount == 0) throw new IndexOutOfBoundsException();
+            entryCount--;
+            info.remove(entryCount);
+            model.removeRow(entryCount);
+        }
+        catch (IndexOutOfBoundsException ioobe) {
+            ioobe.printStackTrace();
+            new DialogGui(3, "Error!", "Data is already empty! Please add data first!");
+        }
     }
 
     private void btnCalculateActionPerformed(ActionEvent evt) {
@@ -259,6 +271,7 @@ public class MainGui extends JFrame {
                 GPA tmp = new GPA(d[0], Double.parseDouble(d[1]), Double.parseDouble(d[2]));
                 info.add(tmp);
                 model.addRow(tmp.toArray());
+                entryCount++;
             }
             br.close();
             if (info.size() == 0)
