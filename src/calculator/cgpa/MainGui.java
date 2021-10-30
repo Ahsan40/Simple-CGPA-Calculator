@@ -115,6 +115,10 @@ public class MainGui extends JFrame {
         btnLoadFromFile = new JButton("Load From Txt File");
         btnSaveToFile = new JButton("Save To Txt File");
 
+        if (entryCount == 0) {
+            changeOptionState(false);
+        }
+
         jtblConsole = new JTable();
         jspConsole = new JScrollPane();
         model = new DefaultTableModel();
@@ -238,6 +242,7 @@ public class MainGui extends JFrame {
         model.fireTableDataChanged();
         entryCount = 0;
         tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
+        changeOptionState(false);
     }
 
     private void btnAddActionPerformed(ActionEvent evt) {
@@ -259,6 +264,8 @@ public class MainGui extends JFrame {
             model.addRow(tmp.toArray());
 
             // changing other ui states
+            if (entryCount > 1)
+                changeOptionState(true);
             if (name.equals("Subject " + (entryCount + 1)) || name.equals("Semester " + (entryCount + 1))) {
                 entryCount++;
                 tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
@@ -272,11 +279,16 @@ public class MainGui extends JFrame {
             ike.printStackTrace();
             new DialogGui(3, "Warning!", "Result can not be negative!");
         }
+        catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+            new DialogGui(3, "Warning!", "Result and Credit can not be empty!");
+        }
     }
 
     private void btnRemoveActionPerformed(ActionEvent evt) {
         try {
             if (entryCount == 0) throw new IndexOutOfBoundsException();
+            else if (entryCount < 2) changeOptionState(false);
             entryCount--;
             info.remove(entryCount);
             model.removeRow(entryCount);
@@ -313,10 +325,14 @@ public class MainGui extends JFrame {
             tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
             if (info.size() == 0)
                 throw new InvalidParameterException();
-            else if (info.size() < 2)
+            else if (info.size() < 2) {
+                changeOptionState(false);
                 throw new InsufficientResourcesException();
-            else
+            }
+            else {
                 new DialogGui(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
+                changeOptionState(true);
+            }
         }
         catch (IOException ioe) {
             String line = "# This line is comment. You can add '#' at the beginning of line\n" +
@@ -366,6 +382,13 @@ public class MainGui extends JFrame {
             ioe.printStackTrace();
             new DialogGui(3, "Error!", "Could not create the " + Config.fileName + " file");
         }
+    }
+
+    private void changeOptionState(boolean value) {
+        btnCalculate.setEnabled(value);
+        btnSaveToFile.setEnabled(value);
+        btnClear.setEnabled(value);
+        btnRemove.setEnabled(value);
     }
 
     private double calculate() {
