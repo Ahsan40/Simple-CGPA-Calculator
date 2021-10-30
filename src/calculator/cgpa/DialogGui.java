@@ -2,8 +2,8 @@ package calculator.cgpa;
 
 import javax.swing.*;
 
-public class Result extends JDialog {
-    public Result(String txt) {
+public class DialogGui extends JDialog {
+    public DialogGui(String txt) {
         initComponents();
         JDialog dialog = new JDialog(new javax.swing.JFrame(), txt);
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
