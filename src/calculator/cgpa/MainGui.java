@@ -214,6 +214,7 @@ public class MainGui extends JFrame {
         category = 1;
         rdoGPA.setSelected(true);
         model.setColumnIdentifiers(new String[] {"Subject", "Result", "Credit"});
+        tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
     }
 
     private void rdoCGPAActionPerformed(ActionEvent evt) {
@@ -223,6 +224,7 @@ public class MainGui extends JFrame {
         category = 2;
         rdoCGPA.setSelected(true);
         model.setColumnIdentifiers(new String[] {"Semester", "Result", "Credit"});
+        tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
     }
 
     private void btnClearActionPerformed(ActionEvent evt) {
