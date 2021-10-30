@@ -288,11 +288,12 @@ public class MainGui extends JFrame {
     private void btnRemoveActionPerformed(ActionEvent evt) {
         try {
             if (entryCount == 0) throw new IndexOutOfBoundsException();
-            else if (entryCount < 2) changeOptionState(false);
             entryCount--;
             info.remove(entryCount);
             model.removeRow(entryCount);
             tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
+            if (entryCount == 0) changeOptionState(false);
+            else if (entryCount < 2) changeOptionState(true, true, false, false);
         }
         catch (IndexOutOfBoundsException ioobe) {
             ioobe.printStackTrace();
@@ -385,10 +386,17 @@ public class MainGui extends JFrame {
     }
 
     private void changeOptionState(boolean value) {
+        btnRemove.setEnabled(value);
+        btnClear.setEnabled(value);
         btnCalculate.setEnabled(value);
         btnSaveToFile.setEnabled(value);
-        btnClear.setEnabled(value);
-        btnRemove.setEnabled(value);
+    }
+
+    private void changeOptionState(boolean a, boolean b, boolean c, boolean d) {
+        btnRemove.setEnabled(a);
+        btnClear.setEnabled(b);
+        btnCalculate.setEnabled(c);
+        btnSaveToFile.setEnabled(d);
     }
 
     private void warning(int lineBreak, String title, String msg) {
