@@ -7,8 +7,8 @@ import javax.swing.text.StyledDocument;
 
 public class DialogGui extends JDialog {
     JTextPane msgPane;
-    private String msg;
     int lineBreak;
+    private String msg;
 
     public DialogGui(int lineBreak, String title, String msg) {
         // initialization

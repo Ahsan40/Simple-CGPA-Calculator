@@ -129,7 +129,7 @@ public class MainGui extends JFrame {
         jtblConsole.setFont(new java.awt.Font("sanserif", 0, 18));
         jtblConsole.setModel(model);
         jtblConsole.setRowHeight(35);
-        jtblConsole.getTableHeader().setPreferredSize( new Dimension(jtblConsole.getWidth(), 35));
+        jtblConsole.getTableHeader().setPreferredSize(new Dimension(jtblConsole.getWidth(), 35));
         jspConsole.setViewportView(jtblConsole);
 
         // Done with NetBeans
@@ -218,7 +218,7 @@ public class MainGui extends JFrame {
         }
         category = 1;
         rdoGPA.setSelected(true);
-        model.setColumnIdentifiers(new String[] {"Subject", "Result", "Credit"});
+        model.setColumnIdentifiers(new String[]{"Subject", "Result", "Credit"});
         tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
     }
 
@@ -228,7 +228,7 @@ public class MainGui extends JFrame {
         }
         category = 2;
         rdoCGPA.setSelected(true);
-        model.setColumnIdentifiers(new String[] {"Semester", "Result", "Credit"});
+        model.setColumnIdentifiers(new String[]{"Semester", "Result", "Credit"});
         tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
     }
 
@@ -270,16 +270,13 @@ public class MainGui extends JFrame {
                 entryCount++;
                 tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
             }
-        }
-        catch (InvalidParameterException ipe) {
+        } catch (InvalidParameterException ipe) {
             ipe.printStackTrace();
             warning(3, "Warning!", "Credit can not be less than 1!");
-        }
-        catch (InvalidKeyException ike) {
+        } catch (InvalidKeyException ike) {
             ike.printStackTrace();
             warning(3, "Warning!", "Result can not be negative!");
-        }
-        catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             nfe.printStackTrace();
             warning(3, "Warning!", "Result and Credit can not be empty!");
         }
@@ -294,8 +291,7 @@ public class MainGui extends JFrame {
             tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
             if (entryCount == 0) changeOptionState(false);
             else if (entryCount < 2) changeOptionState(true, true, false, false);
-        }
-        catch (IndexOutOfBoundsException ioobe) {
+        } catch (IndexOutOfBoundsException ioobe) {
             ioobe.printStackTrace();
             warning(3, "Error!", "Data is already empty! Please add data first!");
         }
@@ -329,13 +325,11 @@ public class MainGui extends JFrame {
             else if (info.size() < 2) {
                 changeOptionState(false);
                 throw new InsufficientResourcesException();
-            }
-            else {
+            } else {
                 warning(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
                 changeOptionState(true);
             }
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             String line = "# This line is comment. You can add '#' at the beginning of line\n" +
                     "# to consider as a comment. '//' can be used for the same purpose.\n" +
                     "# Example format starts from next line.\n" +
@@ -343,16 +337,14 @@ public class MainGui extends JFrame {
                     "OOP Lab, 4, 1\n";
             writeData(line);
             warning(3, "Warning!", Config.fileName + " not found! A " + Config.fileName + " template has been saved.");
-        }
-        catch (InvalidParameterException ipe) {
+        } catch (InvalidParameterException ipe) {
             ipe.printStackTrace();
             warning(3, "Error!", "Wrong input format. Please check the text file again!");
-        }
-        catch (InsufficientResourcesException ire) {
+        } catch (InsufficientResourcesException ire) {
             ire.printStackTrace();
             String tmp = "At least 2 data needed to calculate GPA/CGPA." +
-                         " Thus, calculation will not performed automatically." +
-                         " Please add more data and click 'Calculate' button.";
+                    " Thus, calculation will not performed automatically." +
+                    " Please add more data and click 'Calculate' button.";
             warning(2, "Warning!", tmp);
         }
     }
@@ -361,13 +353,12 @@ public class MainGui extends JFrame {
         String fileName = "calculatedResult.txt";
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
-            for (GPA a: info) {
+            for (GPA a : info) {
                 bw.write(a.toString() + "\n");
             }
             bw.write((category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
             bw.close();
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
             warning(3, "Error!", "Could not create the " + fileName + " file");
         }
@@ -378,8 +369,7 @@ public class MainGui extends JFrame {
             BufferedWriter bw = new BufferedWriter(new FileWriter(Config.fileName));
             bw.write(line);
             bw.close();
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
             warning(3, "Error!", "Could not create the " + Config.fileName + " file");
         }
@@ -408,11 +398,11 @@ public class MainGui extends JFrame {
     private double calculate() {
         double result = 0;
         double credit = 0;
-        for (GPA a: info) {
+        for (GPA a : info) {
             credit += a.getCredit();
             result += (a.getCredit() * a.getResult());
         }
-        return result/credit;
+        return result / credit;
     }
 
     private void theme() {

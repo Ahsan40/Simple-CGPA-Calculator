@@ -12,7 +12,7 @@ public class GPA {
     }
 
     public String[] toArray() {
-        return new String[] {name, result + "", credit + ""};
+        return new String[]{name, result + "", credit + ""};
     }
 
     public String toString() {
