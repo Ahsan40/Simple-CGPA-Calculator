@@ -2,6 +2,7 @@ package calculator.cgpa;
 
 import javax.naming.InsufficientResourcesException;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -27,7 +28,7 @@ public class MainGui extends JFrame {
     private JScrollPane jspConsole;
     private JRadioButton rdoCGPA;
     private JRadioButton rdoGPA;
-    private JTextArea taConsole;
+    private JTable jtblConsole;
     private JTextField tfCredit;
     private JTextField tfName;
     private JTextField tfResult;
@@ -108,13 +109,21 @@ public class MainGui extends JFrame {
         btnLoadFromFile = new JButton("Load From Txt File");
         btnSaveToFile = new JButton("Save To Txt File");
 
-        taConsole = new JTextArea();
+        jtblConsole = new JTable();
         jspConsole = new JScrollPane();
 
-        taConsole.setColumns(20);
-        taConsole.setRows(5);
-        taConsole.setEnabled(false);
-        jspConsole.setViewportView(taConsole);
+
+        jtblConsole.setFont(new java.awt.Font("sanserif", 0, 18));
+        jtblConsole.setModel(new javax.swing.table.DefaultTableModel(
+                new String [][] {
+                },
+                new String [] {
+                        category == 1 ? "Subject" : "Semester", "Result", "Credit"
+                }
+        ));
+        jtblConsole.setRowHeight(35);
+        jtblConsole.getTableHeader().setPreferredSize( new Dimension(jtblConsole.getWidth(), 35));
+        jspConsole.setViewportView(jtblConsole);
 
         // Done with NetBeans
         //<editor-fold defaultstate="collapsed" desc=" initialization Codes ">
@@ -122,39 +131,40 @@ public class MainGui extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(34, 34, 34)
-                                                .addComponent(btnCalculate, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(33, 33, 33)
-                                                .addComponent(btnSaveToFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addComponent(rdoGPA, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(rdoCGPA, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addComponent(tfName, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblName, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
-                                                .addGap(50, 50, 50)
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addComponent(tfResult, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblResult, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
-                                                .addGap(44, 44, 44)
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblCredit, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(tfCredit)))
-                                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jspConsole, GroupLayout.PREFERRED_SIZE, 677, GroupLayout.PREFERRED_SIZE))
-                                .addGap(14, 17, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(15, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jspConsole, GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(34, 34, 34)
+                                                        .addComponent(btnCalculate, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(33, 33, 33)
+                                                        .addComponent(btnSaveToFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                .addComponent(rdoGPA, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(rdoCGPA, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(18, 18, 18)
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                .addComponent(tfName, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lblName, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(50, 50, 50)
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                .addComponent(tfResult, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lblResult, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(44, 44, 44)
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                                .addComponent(lblCredit, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(tfCredit)))
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                                        .addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE))))
+                                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -176,14 +186,14 @@ public class MainGui extends JFrame {
                                                 .addComponent(rdoGPA, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(1, 1, 1)
                                                 .addComponent(rdoCGPA, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
-                                .addComponent(jspConsole, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
+                                .addComponent(jspConsole, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(btnLoadFromFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnCalculate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -199,16 +209,32 @@ public class MainGui extends JFrame {
         if (rdoCGPA.isSelected()) {
             rdoCGPA.setSelected(false);
         }
-        rdoGPA.setSelected(true);
         category = 1;
+        rdoGPA.setSelected(true);
+        jtblConsole.setModel(new javax.swing.table.DefaultTableModel(
+                new String [][] {
+                },
+                new String [] {
+                        (category == 1 ? "Subject" : "Semester"), "Result", "Credit"
+                }
+        ));
+        jspConsole.setViewportView(jtblConsole);
     }
 
     private void rdoCGPAActionPerformed(ActionEvent evt) {
         if (rdoGPA.isSelected()) {
             rdoGPA.setSelected(false);
         }
-        rdoCGPA.setSelected(true);
         category = 2;
+        rdoCGPA.setSelected(true);
+        jtblConsole.setModel(new javax.swing.table.DefaultTableModel(
+                new String [][] {
+                },
+                new String [] {
+                        (category == 1 ? "Subject" : "Semester"), "Result", "Credit"
+                }
+        ));
+        jspConsole.setViewportView(jtblConsole);
     }
 
     private void btnClearActionPerformed(ActionEvent evt) {
@@ -246,7 +272,7 @@ public class MainGui extends JFrame {
             else if (info.size() < 2)
                 throw new InsufficientResourcesException();
             else
-                new DialogGui(3, "Result", String.format("%.2f", calculate()));
+                new DialogGui(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
         }
         catch (IOException ioe) {
             String line = "# This line is comment. You can add '#' at the beginning of line\n" +
