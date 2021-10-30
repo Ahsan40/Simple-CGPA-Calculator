@@ -5,26 +5,35 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-public class DialogGui extends JDialog implements Runnable {
+public class DialogGui extends JDialog {
+    JTextPane msgPane;
     private String msg;
     int lineBreak;
 
     public DialogGui(int lineBreak, String title, String msg) {
+        // initialization
         this.msg = msg;
         this.lineBreak = lineBreak;
+        initComponents();
 
         // window settings
         setTitle(title);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
-        // start in new thread
-        Thread t = new Thread(this);
-        t.start();
+        // add theme
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DialogGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        setVisible(true);
     }
 
     private void initComponents() {
-        JTextPane msgPane = new JTextPane();
+        msgPane = new JTextPane();
         while (lineBreak > 0) {
             msg = "\n" + msg;
             lineBreak--;
@@ -65,19 +74,5 @@ public class DialogGui extends JDialog implements Runnable {
 
         pack();
         // </editor-fold>
-    }
-
-    @Override
-    public void run() {
-        initComponents();
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        setVisible(true);
-//        System.out.println(Thread.currentThread().getId()); // debug
     }
 }

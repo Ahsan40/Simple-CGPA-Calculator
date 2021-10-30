@@ -273,15 +273,15 @@ public class MainGui extends JFrame {
         }
         catch (InvalidParameterException ipe) {
             ipe.printStackTrace();
-            new DialogGui(3, "Warning!", "Credit can not be less than 1!");
+            warning(3, "Warning!", "Credit can not be less than 1!");
         }
         catch (InvalidKeyException ike) {
             ike.printStackTrace();
-            new DialogGui(3, "Warning!", "Result can not be negative!");
+            warning(3, "Warning!", "Result can not be negative!");
         }
         catch (NumberFormatException nfe) {
             nfe.printStackTrace();
-            new DialogGui(3, "Warning!", "Result and Credit can not be empty!");
+            warning(3, "Warning!", "Result and Credit can not be empty!");
         }
     }
 
@@ -296,12 +296,12 @@ public class MainGui extends JFrame {
         }
         catch (IndexOutOfBoundsException ioobe) {
             ioobe.printStackTrace();
-            new DialogGui(3, "Error!", "Data is already empty! Please add data first!");
+            warning(3, "Error!", "Data is already empty! Please add data first!");
         }
     }
 
     private void btnCalculateActionPerformed(ActionEvent evt) {
-        new DialogGui(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
+        warning(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
     }
 
     private void btnLoadFromFileActionPerformed(ActionEvent evt) {
@@ -330,7 +330,7 @@ public class MainGui extends JFrame {
                 throw new InsufficientResourcesException();
             }
             else {
-                new DialogGui(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
+                warning(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
                 changeOptionState(true);
             }
         }
@@ -341,18 +341,18 @@ public class MainGui extends JFrame {
                     "OOP, 3.67, 3\n" +
                     "OOP Lab, 4, 1\n";
             writeData(line);
-            new DialogGui(3, "Warning!", Config.fileName + " not found! A " + Config.fileName + " template has been saved.");
+            warning(3, "Warning!", Config.fileName + " not found! A " + Config.fileName + " template has been saved.");
         }
         catch (InvalidParameterException ipe) {
             ipe.printStackTrace();
-            new DialogGui(3, "Error!", "Wrong input format. Please check the text file again!");
+            warning(3, "Error!", "Wrong input format. Please check the text file again!");
         }
         catch (InsufficientResourcesException ire) {
             ire.printStackTrace();
             String tmp = "At least 2 data needed to calculate GPA/CGPA." +
                          " Thus, calculation will not performed automatically." +
                          " Please add more data and click 'Calculate' button.";
-            new DialogGui(2, "Warning!", tmp);
+            warning(2, "Warning!", tmp);
         }
     }
 
@@ -368,7 +368,7 @@ public class MainGui extends JFrame {
         }
         catch (IOException ioe) {
             ioe.printStackTrace();
-            new DialogGui(3, "Error!", "Could not create the " + fileName + " file");
+            warning(3, "Error!", "Could not create the " + fileName + " file");
         }
     }
 
@@ -380,7 +380,7 @@ public class MainGui extends JFrame {
         }
         catch (IOException ioe) {
             ioe.printStackTrace();
-            new DialogGui(3, "Error!", "Could not create the " + Config.fileName + " file");
+            warning(3, "Error!", "Could not create the " + Config.fileName + " file");
         }
     }
 
@@ -389,6 +389,12 @@ public class MainGui extends JFrame {
         btnSaveToFile.setEnabled(value);
         btnClear.setEnabled(value);
         btnRemove.setEnabled(value);
+    }
+
+    private void warning(int lineBreak, String title, String msg) {
+        new Thread(() -> {
+            new DialogGui(lineBreak, title, msg);
+        }).start();
     }
 
     private double calculate() {
