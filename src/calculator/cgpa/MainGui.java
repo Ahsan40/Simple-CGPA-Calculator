@@ -5,11 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
 
 public class MainGui extends JFrame {
 
     // Variables declaration
     //<editor-fold defaultstate="collapsed" desc=" Variable Declarations ">
+    ArrayList<GPA> info;
     private JLabel lblName;
     private JLabel lblResult;
     private JLabel lblCredit;
@@ -75,6 +78,11 @@ public class MainGui extends JFrame {
     }
 
     private void initComponents() {
+        // Main components
+        info = new ArrayList<>();
+
+
+        // swing components initialization
         rdoGPA = new JRadioButton("GPA", true);
         rdoCGPA = new JRadioButton("CGPA", false);
         category = 1;
@@ -230,6 +238,15 @@ public class MainGui extends JFrame {
             new DialogGui(3, "Error!", "Could not create the " + Config.fileName + " file");
         }
     }
+
+    private double calculate() {
+        double result = 0;
+        double credit = 0;
+        for (GPA a: info) {
+            credit += a.getCredit();
+            result += (a.getCredit() * a.getResult());
+        }
+        return result/credit;
     }
 
     private void theme() {
