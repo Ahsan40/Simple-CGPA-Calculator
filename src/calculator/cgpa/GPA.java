@@ -15,6 +15,10 @@ public class GPA {
         return new String[] {name, result + "", credit + ""};
     }
 
+    public String toString() {
+        return (name + ", " + result + ", " + credit);
+    }
+
     //<editor-fold defaultstate="collapsed" desc=" Getter-Setter Codes ">
     public String getName() {
         return name;
