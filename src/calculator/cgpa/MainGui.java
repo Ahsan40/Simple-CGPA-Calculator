@@ -7,10 +7,14 @@ public class MainGui extends JFrame {
 
     // Variables declaration
     //<editor-fold defaultstate="collapsed" desc=" Variable Declarations ">
+    private JLabel lblName;
+    private JLabel lblResult;
+    private JLabel lblCredit;
     private JButton btnAdd;
     private JButton btnCalculate;
     private JButton btnClear;
     private JButton btnLoadFromFile;
+    private JButton btnSaveToFile;
     private JButton btnRemove;
     private JScrollPane jspConsole;
     private JRadioButton rdoCGPA;
@@ -55,6 +59,10 @@ public class MainGui extends JFrame {
         rdoCGPA = new JRadioButton("CGPA", false);
         category = 1;
 
+        lblName = new JLabel("Name (Optional)");
+        lblResult = new JLabel("Result");
+        lblCredit = new JLabel("Credit");
+
         tfName = new JTextField("Subject");
         tfResult = new JTextField();
         tfCredit = new JTextField();
@@ -68,6 +76,7 @@ public class MainGui extends JFrame {
         btnClear = new JButton("Clear");
         btnCalculate = new JButton("Calculate");
         btnLoadFromFile = new JButton("Load From Txt File");
+        btnSaveToFile = new JButton("Save To Txt File");
 
         taConsole = new JTextArea();
         jspConsole = new JScrollPane();
@@ -84,61 +93,75 @@ public class MainGui extends JFrame {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(jspConsole)
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(btnAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(rdoGPA, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(rdoCGPA, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(tfName, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(tfResult, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(tfCredit, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGap(21, 21, 21)
-                                                                .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(btnCalculate, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
+                                                .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(34, 34, 34)
+                                                .addComponent(btnCalculate, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(33, 33, 33)
+                                                .addComponent(btnSaveToFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(rdoGPA, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(rdoCGPA, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(tfName, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblName, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(50, 50, 50)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(tfResult, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblResult, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(44, 44, 44)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblCredit, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(tfCredit)))
+                                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jspConsole, GroupLayout.PREFERRED_SIZE, 677, GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(rdoGPA, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(rdoCGPA, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(tfName, GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblName)
+                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(lblCredit)
+                                                                .addComponent(lblResult)))
+                                                .addGap(11, 11, 11)
+                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(tfName, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(tfResult, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(tfCredit, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(btnCalculate, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                                        .addComponent(tfCredit, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(rdoGPA, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(1, 1, 1)
+                                                .addComponent(rdoCGPA, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
                                 .addComponent(jspConsole, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnLoadFromFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnCalculate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnSaveToFile, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17))
         );
-    //</editor-fold>
+
+        //</editor-fold>
         pack();
     }
 
