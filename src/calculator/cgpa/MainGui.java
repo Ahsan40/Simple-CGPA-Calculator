@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 
 public class MainGui extends JFrame {
 
@@ -218,6 +219,17 @@ public class MainGui extends JFrame {
 
     private void btnLoadFromFileActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
+    private void writeData(String line) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(Config.fileName));
+            bw.write(line);
+            bw.close();
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
+            new DialogGui(3, "Error!", "Could not create the " + Config.fileName + " file");
+        }
+    }
     }
 
     private void theme() {
