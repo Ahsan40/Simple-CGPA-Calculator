@@ -253,7 +253,7 @@ public class MainGui extends JFrame {
     }
 
     private void btnCalculateActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        new DialogGui(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
     }
 
     private void btnLoadFromFileActionPerformed(ActionEvent evt) {
