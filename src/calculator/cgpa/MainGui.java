@@ -223,7 +223,13 @@ public class MainGui extends JFrame {
     }
 
     private void btnClearActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        clearAll();
+    }
+
+    private void clearAll() {
+        info.clear();
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
     }
 
     private void btnAddActionPerformed(ActionEvent evt) {
