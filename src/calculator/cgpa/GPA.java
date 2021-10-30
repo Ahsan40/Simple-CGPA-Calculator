@@ -11,6 +11,10 @@ public class GPA {
         this.credit = credit;
     }
 
+    public String[] toArray() {
+        return new String[] {name, result + "", credit + ""};
+    }
+
     //<editor-fold defaultstate="collapsed" desc=" Getter-Setter Codes ">
     public String getName() {
         return name;
