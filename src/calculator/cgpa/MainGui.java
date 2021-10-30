@@ -1,5 +1,6 @@
 package calculator.cgpa;
 
+import javax.naming.InsufficientResourcesException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -7,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class MainGui extends JFrame {
 
@@ -226,7 +228,48 @@ public class MainGui extends JFrame {
     }
 
     private void btnLoadFromFileActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(Config.fileName));
+            String line;
+            while ((line = br.readLine()) != null) {
+                // we can add comments with these
+                if (line.startsWith("#") || line.startsWith("//")) continue;
+
+                String[] d = line.split(",");
+                if (d.length != 3 || d[0] == null || d[1] == null || d[2] == null)
+                    throw new InputMismatchException();
+                info.add(new GPA(d[0], Double.parseDouble(d[1]), Double.parseDouble(d[2])));
+            }
+            br.close();
+            if (info.size() == 0)
+                throw new InvalidParameterException();
+            else if (info.size() < 2)
+                throw new InsufficientResourcesException();
+            else
+                new DialogGui(3, "Result", String.format("%.2f", calculate()));
+        }
+        catch (IOException ioe) {
+            String line = "# This line is comment. You can add '#' at the beginning of line\n" +
+                    "# to consider as a comment. '//' can be used for the same purpose.\n" +
+                    "# Example format starts from next line.\n" +
+                    "OOP, 3.67, 3\n" +
+                    "OOP Lab, 4, 1\n";
+            writeData(line);
+            new DialogGui(3, "Warning!", Config.fileName + " not found! A " + Config.fileName + " template has been saved.");
+        }
+        catch (InvalidParameterException ipe) {
+            ipe.printStackTrace();
+            new DialogGui(3, "Error!", "Wrong input format. Please check the text file again!");
+        }
+        catch (InsufficientResourcesException ire) {
+            ire.printStackTrace();
+            String tmp = "At least 2 data needed to calculate GPA/CGPA." +
+                         " Thus, calculation will not performed automatically." +
+                         " Please add more data and click 'Calculate' button.";
+            new DialogGui(2, "Warning!", tmp);
+        }
+    }
+
     private void writeData(String line) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(Config.fileName));
