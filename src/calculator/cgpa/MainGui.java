@@ -245,6 +245,7 @@ public class MainGui extends JFrame {
     }
 
     private void btnLoadFromFileActionPerformed(ActionEvent evt) {
+        clearAll();
         try {
             BufferedReader br = new BufferedReader(new FileReader(Config.fileName));
             String line;
