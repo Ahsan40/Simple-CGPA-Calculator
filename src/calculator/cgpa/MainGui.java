@@ -2,6 +2,7 @@ package calculator.cgpa;
 
 import javax.naming.InsufficientResourcesException;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -16,6 +17,7 @@ public class MainGui extends JFrame {
     // Variables declaration
     //<editor-fold defaultstate="collapsed" desc=" Variable Declarations ">
     ArrayList<GPA> info;
+    DefaultTableModel model;
     private JLabel lblName;
     private JLabel lblResult;
     private JLabel lblCredit;
@@ -111,16 +113,13 @@ public class MainGui extends JFrame {
 
         jtblConsole = new JTable();
         jspConsole = new JScrollPane();
-
+        model = new DefaultTableModel();
+        model.addColumn("Subject");
+        model.addColumn("Result");
+        model.addColumn("Credit");
 
         jtblConsole.setFont(new java.awt.Font("sanserif", 0, 18));
-        jtblConsole.setModel(new javax.swing.table.DefaultTableModel(
-                new String [][] {
-                },
-                new String [] {
-                        category == 1 ? "Subject" : "Semester", "Result", "Credit"
-                }
-        ));
+        jtblConsole.setModel(model);
         jtblConsole.setRowHeight(35);
         jtblConsole.getTableHeader().setPreferredSize( new Dimension(jtblConsole.getWidth(), 35));
         jspConsole.setViewportView(jtblConsole);
@@ -211,14 +210,7 @@ public class MainGui extends JFrame {
         }
         category = 1;
         rdoGPA.setSelected(true);
-        jtblConsole.setModel(new javax.swing.table.DefaultTableModel(
-                new String [][] {
-                },
-                new String [] {
-                        (category == 1 ? "Subject" : "Semester"), "Result", "Credit"
-                }
-        ));
-        jspConsole.setViewportView(jtblConsole);
+        model.setColumnIdentifiers(new String[] {"Subject", "Result", "Credit"});
     }
 
     private void rdoCGPAActionPerformed(ActionEvent evt) {
@@ -227,14 +219,7 @@ public class MainGui extends JFrame {
         }
         category = 2;
         rdoCGPA.setSelected(true);
-        jtblConsole.setModel(new javax.swing.table.DefaultTableModel(
-                new String [][] {
-                },
-                new String [] {
-                        (category == 1 ? "Subject" : "Semester"), "Result", "Credit"
-                }
-        ));
-        jspConsole.setViewportView(jtblConsole);
+        model.setColumnIdentifiers(new String[] {"Semester", "Result", "Credit"});
     }
 
     private void btnClearActionPerformed(ActionEvent evt) {
@@ -264,7 +249,9 @@ public class MainGui extends JFrame {
                 String[] d = line.split(",");
                 if (d.length != 3 || d[0] == null || d[1] == null || d[2] == null)
                     throw new InputMismatchException();
-                info.add(new GPA(d[0], Double.parseDouble(d[1]), Double.parseDouble(d[2])));
+                GPA tmp = new GPA(d[0], Double.parseDouble(d[1]), Double.parseDouble(d[2]));
+                info.add(tmp);
+                model.addRow(tmp.toArray());
             }
             br.close();
             if (info.size() == 0)
