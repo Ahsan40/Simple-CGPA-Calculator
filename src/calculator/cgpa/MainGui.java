@@ -126,7 +126,7 @@ public class MainGui extends JFrame {
         model.addColumn("Result");
         model.addColumn("Credit");
 
-        jtblConsole.setFont(new java.awt.Font("sanserif", 0, 18));
+        jtblConsole.setFont(new java.awt.Font("sanserif", Font.PLAIN, 18));
         jtblConsole.setModel(model);
         jtblConsole.setRowHeight(35);
         jtblConsole.getTableHeader().setPreferredSize(new Dimension(jtblConsole.getWidth(), 35));
@@ -329,11 +329,13 @@ public class MainGui extends JFrame {
                 changeOptionState(true);
             }
         } catch (IOException ioe) {
-            String line = "# This line is comment. You can add '#' at the beginning of line\n" +
-                    "# to consider as a comment. '//' can be used for the same purpose.\n" +
-                    "# Example format starts from next line.\n" +
-                    "OOP, 3.67, 3\n" +
-                    "OOP Lab, 4, 1\n";
+            String line = """
+                    # This line is comment. You can add '#' at the beginning of line
+                    # to consider as a comment. '//' can be used for the same purpose.
+                    # Example format starts from next line.
+                    OOP, 3.67, 3
+                    OOP Lab, 4, 1
+                    """;
             writeData(line);
             warning(3, "Warning!", Config.fileName + " not found! A " + Config.fileName + " template has been saved.");
         } catch (InvalidParameterException ipe) {
@@ -389,9 +391,7 @@ public class MainGui extends JFrame {
     }
 
     private void warning(int lineBreak, String title, String msg) {
-        new Thread(() -> {
-            new DialogGui(lineBreak, title, msg);
-        }).start();
+        new Thread(() -> new DialogGui(lineBreak, title, msg)).start();
     }
 
     private double calculate() {
