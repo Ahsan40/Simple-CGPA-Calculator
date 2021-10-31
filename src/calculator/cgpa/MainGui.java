@@ -262,14 +262,13 @@ public class MainGui extends JFrame {
             GPA tmp = new GPA(name, result, credit);
             info.add(tmp);
             model.addRow(tmp.toArray());
+            entryCount++;
 
             // changing other ui states
-            if (entryCount > 1)
-                changeOptionState(true);
-            if (name.equals("Subject " + (entryCount + 1)) || name.equals("Semester " + (entryCount + 1))) {
-                entryCount++;
+            if (entryCount == 1) changeOptionState(true, true, false, false);
+            else if (entryCount > 1) changeOptionState(true);
+            if (name.equals("Subject " + (entryCount + 1)) || name.equals("Semester " + (entryCount + 1)))
                 tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
-            }
         } catch (InvalidParameterException ipe) {
             ipe.printStackTrace();
             warning(3, "Warning!", "Credit can not be less than 1!");
