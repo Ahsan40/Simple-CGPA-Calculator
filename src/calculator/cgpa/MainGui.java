@@ -308,6 +308,8 @@ public class MainGui extends JFrame {
             BufferedReader br = new BufferedReader(new FileReader(Config.fileName));
             String line;
             while ((line = br.readLine()) != null) {
+                // ignore empty lines
+                if (line.equals("")) continue;
                 // we can add comments with these
                 if (line.startsWith("#") || line.startsWith("//")) continue;
 
