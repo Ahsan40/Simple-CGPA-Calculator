@@ -322,7 +322,7 @@ public class MainGui extends JFrame {
             if (info.size() == 0)
                 throw new InvalidParameterException();
             else if (info.size() < 2) {
-                changeOptionState(false);
+                changeOptionState(true, true, false, false);
                 throw new InsufficientResourcesException();
             } else {
                 warning(3, "Result", (category == 1 ? "GPA: " : "CGPA: ") + String.format("%.2f", calculate()));
