@@ -256,6 +256,9 @@ public class MainGui extends JFrame {
             double credit = Double.parseDouble(tfCredit.getText());
 
             // checking data
+            // if name is empty, it will add name automatically
+            if (name.equals("") || name.equals(" "))
+                name = (category == 1 ? "Subject " : "Semester ") + (entryCount + 1);
             if (credit < 1)
                 throw new InvalidParameterException();
             if (result < 0)
@@ -318,6 +321,9 @@ public class MainGui extends JFrame {
                 if (d.length != 3 || d[0] == null || d[1] == null || d[2] == null)
                     throw new InputMismatchException();
                 GPA tmp = new GPA(d[0], Double.parseDouble(d[1]), Double.parseDouble(d[2]));
+                // if name is empty, it will add name automatically
+                if (tmp.getName().equals("") || tmp.getName().equals(" "))
+                    tmp.setName((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
                 info.add(tmp);
                 model.addRow(tmp.toArray());
                 entryCount++;
