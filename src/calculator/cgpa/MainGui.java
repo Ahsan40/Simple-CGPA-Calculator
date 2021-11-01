@@ -270,7 +270,7 @@ public class MainGui extends JFrame {
             // changing other ui states
             if (entryCount == 1) changeOptionState(true, true, false, false);
             else if (entryCount > 1) changeOptionState(true);
-            if (name.equals("Subject " + (entryCount + 1)) || name.equals("Semester " + (entryCount + 1)))
+            if (name.equals("Subject " + entryCount) || name.equals("Semester " + entryCount))
                 tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
         } catch (InvalidParameterException ipe) {
             ipe.printStackTrace();
