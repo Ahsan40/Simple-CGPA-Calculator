@@ -2,6 +2,7 @@ package calculator.cgpa;
 
 import javax.naming.InsufficientResourcesException;
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -395,7 +396,7 @@ public class MainGui extends JFrame {
     }
 
     private void warning(int lineBreak, String title, String msg) {
-        new Thread(() -> new DialogGui(lineBreak, title, msg)).start();
+        new Thread(() -> new DialogGui(lineBreak, title, msg).setVisible(true)).start();
     }
 
     private double calculate() {
@@ -411,9 +412,10 @@ public class MainGui extends JFrame {
     private void theme() {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new NimbusLookAndFeel());
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (UnsupportedLookAndFeelException exc) {
+            System.err.println("Nimbus: Unsupported Look and feel!");
         }
         //</editor-fold>
     }
