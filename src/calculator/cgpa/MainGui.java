@@ -10,6 +10,7 @@ import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class MainGui extends JFrame {
@@ -97,6 +98,9 @@ public class MainGui extends JFrame {
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     setEnabled(false);
                     new EditEntry(jf, info, model, row, col);
+                }
+                else if (mouseEvent.getClickCount() == 1 && table.getSelectedRow() != -1) {
+                    btnRemove.setText("Remove");
                 }
             }
         });
@@ -309,12 +313,36 @@ public class MainGui extends JFrame {
     }
 
     private void btnRemoveActionPerformed(ActionEvent evt) {
-        entryCount--;
-        info.remove(entryCount);
-        model.removeRow(entryCount);
-        tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
+        // checking if any rows selected
+        int size = table.getSelectedRowCount();
+
+        if (size > 0) {
+            // storing selected index in sorting them (ascending)
+            int[] rows = table.getSelectedRows();
+            Arrays.sort(rows);
+
+            // reversing arrays (else removing elements from ArrayList & Table  will cause exceptions)
+            int[] rowsIndex = new int[size];
+            for (int i = 0; i < size; i++) rowsIndex[i] = rows[size - i - 1];
+
+            // removing selected index'
+            for (int index: rowsIndex) {
+                info.remove(index);
+                model.removeRow(index);
+                entryCount--;
+            }
+        } else {
+            // if no row is selected (Remove Last)
+            entryCount--;
+            info.remove(entryCount);
+            model.removeRow(entryCount);
+        }
+
+        // Updating changes to UI
+        btnRemove.setText("Remove Last");
         if (entryCount == 0) changeOptionState(false);
         else if (entryCount < 2) changeOptionState(true, true, false, false);
+        tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
     }
 
     private void btnCalculateActionPerformed(ActionEvent evt) {
