@@ -5,9 +5,7 @@ import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.InvalidParameterException;
@@ -67,6 +65,7 @@ public class MainGui extends JFrame {
         btnSaveToFile.addActionListener(this::btnSaveToFileActionPerformed);
         rdoGPA.addActionListener(this::rdoGPAActionPerformed);
         rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
+
         // tfResult validation
         tfResult.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -76,12 +75,28 @@ public class MainGui extends JFrame {
                 }
             }
         });
+
         // tfCredit validation
         tfCredit.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!((c >= '0') && (c <= '9') || c == '.' || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
                     e.consume();
+                }
+            }
+        });
+
+        // action listener for table (double click to edit)
+        JFrame jf = this;
+        table.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                int col = table.columnAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    setEnabled(false);
+                    new EditEntry(jf, info, model, row, col);
                 }
             }
         });
@@ -120,6 +135,14 @@ public class MainGui extends JFrame {
             changeOptionState(false);
         }
 
+        table = new JTable() {
+            // making table non-editable
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        scrollPane = new JScrollPane();
         model = new DefaultTableModel();
         model.addColumn("Subject");
         model.addColumn("Result");
