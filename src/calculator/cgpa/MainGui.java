@@ -309,18 +309,12 @@ public class MainGui extends JFrame {
     }
 
     private void btnRemoveActionPerformed(ActionEvent evt) {
-        try {
-            if (entryCount == 0) throw new IndexOutOfBoundsException();
-            entryCount--;
-            info.remove(entryCount);
-            model.removeRow(entryCount);
-            tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
-            if (entryCount == 0) changeOptionState(false);
-            else if (entryCount < 2) changeOptionState(true, true, false, false);
-        } catch (IndexOutOfBoundsException ioobe) {
-            ioobe.printStackTrace();
-            warning(3, "Error!", "Data is already empty! Please add data first!");
-        }
+        entryCount--;
+        info.remove(entryCount);
+        model.removeRow(entryCount);
+        tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
+        if (entryCount == 0) changeOptionState(false);
+        else if (entryCount < 2) changeOptionState(true, true, false, false);
     }
 
     private void btnCalculateActionPerformed(ActionEvent evt) {
