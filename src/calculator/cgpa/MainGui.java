@@ -91,15 +91,14 @@ public class MainGui extends JFrame {
         JFrame jf = this;
         table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
-                JTable table =(JTable) mouseEvent.getSource();
+                JTable table = (JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 int col = table.columnAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     setEnabled(false);
                     new EditEntry(jf, info, model, row, col);
-                }
-                else if (mouseEvent.getClickCount() == 1 && table.getSelectedRow() != -1) {
+                } else if (mouseEvent.getClickCount() == 1 && table.getSelectedRow() != -1) {
                     btnRemove.setText("Remove");
                 }
             }
@@ -326,7 +325,7 @@ public class MainGui extends JFrame {
             for (int i = 0; i < size; i++) rowsIndex[i] = rows[size - i - 1];
 
             // removing selected index'
-            for (int index: rowsIndex) {
+            for (int index : rowsIndex) {
                 info.remove(index);
                 model.removeRow(index);
                 entryCount--;
@@ -387,6 +386,7 @@ public class MainGui extends JFrame {
                     # This line is comment. You can add '#' at the beginning of line
                     # to consider as a comment. '//' can be used for the same purpose.
                     # Example format starts from next line.
+                                        
                     OOP, 3.67, 3
                     OOP Lab, 4, 1
                     """;

@@ -67,7 +67,7 @@ public class EditEntry extends JFrame {
         });
 
         // event listener
-        btnUpdate.addActionListener( e -> {
+        btnUpdate.addActionListener(e -> {
             try {
                 // getting new data
                 String name = tfName.getText();
