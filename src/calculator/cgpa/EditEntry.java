@@ -6,9 +6,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.security.InvalidKeyException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class EditEntry extends JFrame {
 
@@ -74,8 +74,17 @@ public class EditEntry extends JFrame {
                 String result = tfResult.getText();
                 String credit = tfCredit.getText();
 
+                // credit can not be 0 or less
+                if (Double.parseDouble(credit) < 1)
+                    throw new InvalidParameterException();
+
+                // result can not be less than 0
+                if ((Double.parseDouble(result) < 0))
+                    throw new InvalidKeyException();
+
                 // updating data to list
-                data.get(row).setName(name);
+                if (!name.equals(""))   /// name won't be change if text field empty
+                    data.get(row).setName(name);
                 data.get(row).setResult(Double.parseDouble(result));
                 data.get(row).setCredit(Double.parseDouble(credit));
 
@@ -92,6 +101,12 @@ public class EditEntry extends JFrame {
             } catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
                 new Thread(() -> new DialogGui(3, "Warning!", "Invalid Input in Result or Credit field!").setVisible(true)).start();
+            } catch (InvalidKeyException ike) {
+                ike.printStackTrace();
+                new Thread(() -> new DialogGui(3, "Warning!", "Result can not be negative!").setVisible(true)).start();
+            } catch (InvalidParameterException ipe) {
+                ipe.printStackTrace();
+                new Thread(() -> new DialogGui(3, "Warning!", "Credit can not be less than 1!").setVisible(true)).start();
             }
         });
 
