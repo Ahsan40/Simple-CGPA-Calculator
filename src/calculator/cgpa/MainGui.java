@@ -281,7 +281,7 @@ public class MainGui extends JFrame {
             warning(3, "Warning!", "Result can not be negative!");
         } catch (NumberFormatException nfe) {
             nfe.printStackTrace();
-            warning(3, "Warning!", "Result and Credit can not be empty!");
+            warning(3, "Warning!", "Invalid Input in Result or Credit field!");
         }
     }
 
