@@ -29,10 +29,10 @@ public class MainGui extends JFrame {
     private JButton btnLoadFromFile;
     private JButton btnSaveToFile;
     private JButton btnRemove;
-    private JScrollPane jspConsole;
+    private JTable table;
+    private JScrollPane scrollPane;
     private JRadioButton rdoCGPA;
     private JRadioButton rdoGPA;
-    private JTable jtblConsole;
     private JTextField tfCredit;
     private JTextField tfName;
     private JTextField tfResult;
@@ -120,18 +120,16 @@ public class MainGui extends JFrame {
             changeOptionState(false);
         }
 
-        jtblConsole = new JTable();
-        jspConsole = new JScrollPane();
         model = new DefaultTableModel();
         model.addColumn("Subject");
         model.addColumn("Result");
         model.addColumn("Credit");
 
-        jtblConsole.setFont(new java.awt.Font("sanserif", Font.PLAIN, 18));
-        jtblConsole.setModel(model);
-        jtblConsole.setRowHeight(35);
-        jtblConsole.getTableHeader().setPreferredSize(new Dimension(jtblConsole.getWidth(), 35));
-        jspConsole.setViewportView(jtblConsole);
+        table.setFont(new java.awt.Font("sanserif", Font.PLAIN, 18));
+        table.setModel(model);
+        table.setRowHeight(35);
+        table.getTableHeader().setPreferredSize(new Dimension(table.getWidth(), 35));
+        scrollPane.setViewportView(table);
 
         // Done with NetBeans
         //<editor-fold defaultstate="collapsed" desc=" initialization Codes ">
@@ -142,7 +140,7 @@ public class MainGui extends JFrame {
                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(15, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jspConsole, GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                 .addGroup(layout.createSequentialGroup()
                                                         .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
@@ -200,7 +198,7 @@ public class MainGui extends JFrame {
                                         .addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26)
-                                .addComponent(jspConsole, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(btnLoadFromFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
