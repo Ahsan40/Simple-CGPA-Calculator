@@ -320,12 +320,15 @@ public class MainGui extends JFrame {
             int[] rows = table.getSelectedRows();
             Arrays.sort(rows);
 
-            // reversing arrays (else removing elements from ArrayList & Table  will cause exceptions)
-            int[] rowsIndex = new int[size];
-            for (int i = 0; i < size; i++) rowsIndex[i] = rows[size - i - 1];
+            // reversing arrays (else removing elements from ArrayList & Table may cause exceptions)
+            for (int i = 0; i < size/2; i++) {
+                int tmp = rows[i];
+                rows[i] = rows[size - i - 1];
+                rows[size - i - 1] = tmp;
+            }
 
             // removing selected index'
-            for (int index : rowsIndex) {
+            for (int index : rows) {
                 info.remove(index);
                 model.removeRow(index);
                 entryCount--;
