@@ -12,6 +12,7 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.Objects;
 
 public class MainGui extends JFrame {
 
@@ -49,6 +50,7 @@ public class MainGui extends JFrame {
         // window settings
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(Config.title + " " + Config.version);
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource(Config.icon))).getImage());
         setResizable(false);
 
         // change default theme to "Nimbus"
