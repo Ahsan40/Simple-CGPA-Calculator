@@ -48,7 +48,7 @@ public class MainGui extends JFrame {
 
         // window settings
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Simple CGPA Calculator");
+        setTitle(Config.title + " " + Config.version);
         setResizable(false);
 
         // change default theme to "Nimbus"
@@ -321,7 +321,7 @@ public class MainGui extends JFrame {
             Arrays.sort(rows);
 
             // reversing arrays (else removing elements from ArrayList & Table may cause exceptions)
-            for (int i = 0; i < size/2; i++) {
+            for (int i = 0; i < size / 2; i++) {
                 int tmp = rows[i];
                 rows[i] = rows[size - i - 1];
                 rows[size - i - 1] = tmp;
@@ -354,7 +354,7 @@ public class MainGui extends JFrame {
     private void btnLoadFromFileActionPerformed(ActionEvent evt) {
         clearAll();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(Config.fileName));
+            BufferedReader br = new BufferedReader(new FileReader(Config.inFileName));
             String line;
             while ((line = br.readLine()) != null) {
                 // ignore empty lines
@@ -394,7 +394,7 @@ public class MainGui extends JFrame {
                     OOP Lab, 4, 1
                     """;
             writeData(line);
-            warning(3, "Warning!", Config.fileName + " not found! A " + Config.fileName + " template has been saved.");
+            warning(3, "Warning!", Config.inFileName + " not found! A " + Config.inFileName + " template has been saved.");
         } catch (InvalidParameterException ipe) {
             ipe.printStackTrace();
             warning(3, "Error!", "Wrong input format. Please check the text file again!");
@@ -408,9 +408,8 @@ public class MainGui extends JFrame {
     }
 
     private void btnSaveToFileActionPerformed(ActionEvent evt) {
-        String fileName = "calculatedResult.txt";
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(Config.outFileName));
             for (GPA a : info) {
                 bw.write(a.toString() + "\n");
             }
@@ -418,18 +417,18 @@ public class MainGui extends JFrame {
             bw.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-            warning(3, "Error!", "Could not create the " + fileName + " file");
+            warning(3, "Error!", "Could not create the " + Config.outFileName + " file");
         }
     }
 
     private void writeData(String line) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(Config.fileName));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(Config.inFileName));
             bw.write(line);
             bw.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
-            warning(3, "Error!", "Could not create the " + Config.fileName + " file");
+            warning(3, "Error!", "Could not create the " + Config.inFileName + " file");
         }
     }
 
