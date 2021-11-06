@@ -82,15 +82,14 @@ public class EditEntry extends JFrame {
                 if ((Double.parseDouble(result) < 0))
                     throw new InvalidKeyException();
 
-                // updating data to list
-                if (!name.equals(""))   /// name won't be change if text field empty
+                // updating data to ArrayList and Table
+                if (!name.equals("")) {  // name won't be change if text field empty
                     data.get(row).setName(name);
+                    model.setValueAt(name, row, 0);
+                }
                 data.get(row).setResult(Double.parseDouble(result));
-                data.get(row).setCredit(Double.parseDouble(credit));
-
-                // updating data to table
-                model.setValueAt(name, row, 0);
                 model.setValueAt(result, row, 1);
+                data.get(row).setCredit(Double.parseDouble(credit));
                 model.setValueAt(credit, row, 2);
 
                 // enabling main windows
