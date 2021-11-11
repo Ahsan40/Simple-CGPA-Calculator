@@ -22,6 +22,7 @@ public class DialogGui extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource(Config.icon))).getImage());
+        setResizable(false);
     }
 
     private void initComponents() {
