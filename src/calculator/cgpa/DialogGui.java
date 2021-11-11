@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.util.Objects;
 
 public class DialogGui extends JDialog {
     JTextPane msgPane;
@@ -20,6 +21,7 @@ public class DialogGui extends JDialog {
         setTitle(title);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource(Config.icon))).getImage());
     }
 
     private void initComponents() {
