@@ -26,7 +26,7 @@ public class MainGui extends JFrame {
     private JButton btnAdd;
     private JButton btnCalculate;
     private JButton btnClear;
-    private JButton btnLoadFromFile;
+    private JButton btnReadFromFile;
     private JButton btnSaveToFile;
     private JButton btnRemove;
     private JTable table;
@@ -64,7 +64,7 @@ public class MainGui extends JFrame {
         btnRemove.addActionListener(this::btnRemoveActionPerformed);
         btnClear.addActionListener(this::btnClearActionPerformed);
         btnCalculate.addActionListener(this::btnCalculateActionPerformed);
-        btnLoadFromFile.addActionListener(this::btnLoadFromFileActionPerformed);
+        btnReadFromFile.addActionListener(this::btnLoadFromFileActionPerformed);
         btnSaveToFile.addActionListener(this::btnSaveToFileActionPerformed);
         rdoGPA.addActionListener(this::rdoGPAActionPerformed);
         rdoCGPA.addActionListener(this::rdoCGPAActionPerformed);
@@ -133,7 +133,7 @@ public class MainGui extends JFrame {
         btnRemove = new JButton("Remove Last");
         btnClear = new JButton("Clear All");
         btnCalculate = new JButton("Calculate");
-        btnLoadFromFile = new JButton("Load From Txt File");
+        btnReadFromFile = new JButton("Read From Txt File");
         btnSaveToFile = new JButton("Save To Txt File");
 
         if (entryCount == 0) {
@@ -171,7 +171,7 @@ public class MainGui extends JFrame {
                                         .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                 .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(btnLoadFromFile, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnReadFromFile, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
                                                         .addGap(34, 34, 34)
                                                         .addComponent(btnCalculate, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
                                                         .addGap(33, 33, 33)
@@ -229,7 +229,7 @@ public class MainGui extends JFrame {
                                 .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnLoadFromFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnReadFromFile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnCalculate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnSaveToFile, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE))
                                 .addGap(17, 17, 17))
