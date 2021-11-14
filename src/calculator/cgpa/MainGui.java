@@ -365,8 +365,10 @@ public class MainGui extends JFrame {
                 if (line.startsWith("#") || line.startsWith("//")) continue;
 
                 String[] d = line.split(",");
-                if (d.length != 3 || d[0] == null || d[1] == null || d[2] == null)
-                    throw new InputMismatchException();
+                if (d.length != 3 || d[0] == null || d[1] == null || d[2] == null) {
+                    br.close();
+                    throw new InvalidParameterException();
+                }
                 GPA tmp = new GPA(d[0], Double.parseDouble(d[1]), Double.parseDouble(d[2]));
                 // if name is empty, it will add name automatically
                 if (tmp.getName().equals("") || tmp.getName().equals(" "))
@@ -377,9 +379,12 @@ public class MainGui extends JFrame {
             }
             br.close();
             tfName.setText((category == 1 ? "Subject " : "Semester ") + (entryCount + 1));
-            if (info.size() == 0)
+            if (info.size() == 0) {
+                br.close();
                 throw new InvalidParameterException();
+            }
             else if (info.size() < 2) {
+                br.close();
                 changeOptionState(true, true, false, false);
                 throw new InsufficientResourcesException();
             } else {
